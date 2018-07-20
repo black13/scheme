@@ -155,13 +155,17 @@ SCHEME_EXPORT pointer gensym(scheme *sc);
 SCHEME_EXPORT pointer mk_string(scheme *sc, const char *str);
 SCHEME_EXPORT pointer mk_counted_string(scheme *sc, const char *str, int len);
 SCHEME_EXPORT pointer mk_empty_string(scheme *sc, int len, char fill);
-pointer mk_character(scheme *sc, int c);
-pointer mk_foreign_func(scheme *sc, foreign_func f);
-void putstr(scheme *sc, const char *s);
-int list_length(scheme *sc, pointer a);
-int eqv(pointer a, pointer b);
+SCHEME_EXPORT pointer mk_character(scheme *sc, int c);
+SCHEME_EXPORT pointer mk_foreign_func(scheme *sc, foreign_func f);
+SCHEME_EXPORT void putstr(scheme *sc, const char *s);
+SCHEME_EXPORT int list_length(scheme *sc, pointer a);
+SCHEME_EXPORT int eqv(pointer a, pointer b);
 
+SCHEME_EXPORT pointer pair_car(pointer p);
+SCHEME_EXPORT pointer pair_cdr(pointer p);
 
+SCHEME_EXPORT int is_symbol(pointer p); 
+SCHEME_EXPORT char *symname(pointer p); 
 #if USE_INTERFACE
 struct scheme_interface {
   void (*scheme_define)(scheme *sc, pointer env, pointer symbol, pointer value);

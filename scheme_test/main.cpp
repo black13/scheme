@@ -33,6 +33,27 @@ int main(int argc, char *argv[])
 
 #endif
 # define InitFile "init.scm"
+
+pointer foreign_get(scheme *sc, pointer args)
+{
+	pointer     first_arg;
+	pointer     ret;
+	char       *varname;
+	const char *value;
+
+	return args;
+}
+
+pointer foreign_set(scheme *sc, pointer args)
+{
+	pointer     first_arg;
+	pointer     ret;
+	char       *varname;
+	const char *value;
+
+	return args;
+}
+
 int main(int argc, char **argv) {
 
 	scheme sc;
@@ -46,6 +67,9 @@ int main(int argc, char **argv) {
 
 	scheme_set_output_port_file(&sc, stdout);
 	pointer symbol = nullptr;
+
+	scheme_define(&sc,sc.envir,mk_symbol(&sc, "set-func"),mk_foreign_func(&sc, foreign_set));
+
 	symbol = mk_symbol(&sc, "integer-value");
 	scheme_define(&sc, sc.envir, symbol, mk_integer(&sc, 1));
 	//scheme_load_string(&sc, "(define i 1)");
