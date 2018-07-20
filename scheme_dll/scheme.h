@@ -147,14 +147,14 @@ SCHEME_EXPORT void scheme_define(scheme *sc, pointer env, pointer symbol, pointe
 
 typedef pointer (*foreign_func)(scheme *, pointer);
 
-pointer _cons(scheme *sc, pointer a, pointer b, int immutable);
-pointer mk_integer(scheme *sc, long num);
-pointer mk_real(scheme *sc, double num);
-pointer mk_symbol(scheme *sc, const char *name);
-pointer gensym(scheme *sc);
-pointer mk_string(scheme *sc, const char *str);
-pointer mk_counted_string(scheme *sc, const char *str, int len);
-pointer mk_empty_string(scheme *sc, int len, char fill);
+SCHEME_EXPORT pointer _cons(scheme *sc, pointer a, pointer b, int immutable);
+SCHEME_EXPORT pointer mk_integer(scheme *sc, long num);
+SCHEME_EXPORT pointer mk_real(scheme *sc, double num);
+SCHEME_EXPORT pointer mk_symbol(scheme *sc, const char *name);
+SCHEME_EXPORT pointer gensym(scheme *sc);
+SCHEME_EXPORT pointer mk_string(scheme *sc, const char *str);
+SCHEME_EXPORT pointer mk_counted_string(scheme *sc, const char *str, int len);
+SCHEME_EXPORT pointer mk_empty_string(scheme *sc, int len, char fill);
 pointer mk_character(scheme *sc, int c);
 pointer mk_foreign_func(scheme *sc, foreign_func f);
 void putstr(scheme *sc, const char *s);
