@@ -156,8 +156,8 @@ enum scheme_opcodes {
 #define cons(sc,a,b) _cons(sc,a,b,0)
 #define immutable_cons(sc,a,b) _cons(sc,a,b,1)
 
-int is_string(pointer p);
-char *string_value(pointer p);
+SCHEME_EXPORT int is_string(pointer p);
+SCHEME_EXPORT char *string_value(pointer p);
 int is_number(pointer p);
 num nvalue(pointer p);
 long ivalue(pointer p);

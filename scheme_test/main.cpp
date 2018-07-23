@@ -40,18 +40,41 @@ pointer foreign_get(scheme *sc, pointer args)
 	pointer     ret;
 	char       *varname;
 	const char *value;
+	if (args == sc->NIL)
+		return sc->F;
+	auto flag = args->_flag;
+	//first_arg = sc->pair_car(args);
 
 	return args;
 }
-
+#define ADJ 32
+#define TYPE_BITS 5
+#define T_MASKTYPE      31    /* 0000000000011111 */
+#define T_SYNTAX      4096    /* 0001000000000000 */
+#define T_IMMUTABLE   8192    /* 0010000000000000 */
+#define T_ATOM       16384    /* 0100000000000000 */   /* only for gc */
+#define CLRATOM      49151    /* 1011111111111111 */   /* only for gc */
+#define MARK         32768    /* 1000000000000000 */
+#define UNMARK       32767    /* 0111111111111111 */
 pointer foreign_set(scheme *sc, pointer args)
 {
 	pointer     first_arg;
 	pointer     ret;
 	char       *varname;
 	const char *value;
+	if (args == sc->NIL)
+		return sc->F;
+	auto flag = args->_flag;
+	int i = list_length(sc,args);
 
-	return args;
+	first_arg = pair_car(args);
+	i = (first_arg)->_flag & T_ATOM;
+	if (!is_string(first_arg))
+		return sc->F;
+
+	first_arg = pair_car(first_arg);
+
+	return sc->T;
 }
 
 int main(int argc, char **argv) {
@@ -74,6 +97,7 @@ int main(int argc, char **argv) {
 	scheme_define(&sc, sc.envir, symbol, mk_integer(&sc, 1));
 	//scheme_load_string(&sc, "(define i 1)");
 	scheme_load_string(&sc, "(write integer-value)");
+	scheme_load_string(&sc, "(set-func \"abc\")");
 	//set and retrieve the value of a named object in scheme.
 	retcode = sc.retcode;
 	scheme_deinit(&sc);
